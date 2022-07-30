@@ -13,10 +13,11 @@ import { ColorSchemeName, Pressable } from 'react-native';
 import Colors from '../constants/Colors';
 import useColorScheme from '../hooks/useColorScheme';
 import IconFont, { IconNames } from '../icons';
+import { AddNewScreen } from '../screens/AddNewScreen';
 import ModalScreen from '../screens/ModalScreen';
 import NotFoundScreen from '../screens/NotFoundScreen';
-import TabOneScreen from '../screens/TabOneScreen';
-import TabTwoScreen from '../screens/TabTwoScreen';
+import { RecordListScreen } from '../screens/RecordListScreen';
+import { ReportChartScreen } from '../screens/ReportChartScreen';
 import { RootStackParamList, RootTabParamList, RootTabScreenProps } from '../types';
 import LinkingConfiguration from './LinkingConfiguration';
 
@@ -42,7 +43,7 @@ function RootNavigator() {
       <Stack.Screen name="Root" component={BottomTabNavigator} options={{ headerShown: false }} />
       <Stack.Screen name="NotFound" component={NotFoundScreen} options={{ title: 'Oops!' }} />
       <Stack.Group screenOptions={{ presentation: 'modal' }}>
-        <Stack.Screen name="Modal" component={ModalScreen} />
+        <Stack.Screen name="AddNew" component={ModalScreen} />
       </Stack.Group>
     </Stack.Navigator>
   );
@@ -65,7 +66,7 @@ function BottomTabNavigator() {
       }}>
       <BottomTab.Screen
         name="RecordList"
-        component={TabOneScreen}
+        component={RecordListScreen}
         options={({ navigation }: RootTabScreenProps<'RecordList'>) => ({
           title: '记录',
           tabBarIcon: ({ focused, color }) => <TabBarIcon name={focused ? 'list' : 'list-lite'} color={color} />,
@@ -87,15 +88,16 @@ function BottomTabNavigator() {
       />
       <BottomTab.Screen
         name="AddNew"
-        component={TabOneScreen}
+        component={AddNewScreen}
         options={{
+          title: '新增',
           tabBarLabel:() => null,
           tabBarIcon: ({ color }) => <TabBarIcon name="plus" color={color} />
         }}
       />
       <BottomTab.Screen
-        name="ReportChar"
-        component={TabTwoScreen}
+        name="ReportChart"
+        component={ReportChartScreen}
         options={{
           title: '报表',
           tabBarIcon: ({ focused, color }) => <TabBarIcon name={focused ? 'chart' : 'chart-lite'} />,
